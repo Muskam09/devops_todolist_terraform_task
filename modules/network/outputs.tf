@@ -12,6 +12,10 @@ output "nsg_id" {
   description = "ID Network Security Group."
   value       = azurerm_network_security_group.defaultnsg.id
 }
+output "public_ip_id" {
+  description = "The ID of the Public IP Address."
+  value       = azurerm_public_ip.linuxboxpip.id
+}
 
 output "public_ip_address" {
   description = "Actual public IP address."

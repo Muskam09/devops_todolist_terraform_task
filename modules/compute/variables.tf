@@ -33,3 +33,14 @@ variable "install_app_script_url" {
   description = "Link to script"
   type        = string
 }
+
+variable "admin_username" {
+  description = "Admin username"
+  type        = string
+}
+
+
+variable "public_ip_id" {
+  description = "The ID of the Public IP Address to associate with the VM's network interface."
+  type        = string
+}

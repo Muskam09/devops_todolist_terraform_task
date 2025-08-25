@@ -36,6 +36,8 @@ module "compute" {
   vm_size                = var.vm_size
   install_app_script_url = var.install_app_script_url
   subnet_id              = module.network.subnet_id
+  public_ip_id           = module.network.public_ip_id
+  admin_username         = var.admin_username
 }
 
 module "storage" {

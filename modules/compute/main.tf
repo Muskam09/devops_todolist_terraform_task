@@ -7,6 +7,7 @@ resource "azurerm_network_interface" "main" {
     name                          = "configuration1"
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = var.public_ip_id
   }
 
   lifecycle {
@@ -14,36 +15,30 @@ resource "azurerm_network_interface" "main" {
   }
 }
 
-resource "azurerm_virtual_machine" "matebox" {
+resource "azurerm_linux_virtual_machine" "matebox" {
   name                  = var.vm_name
   location              = var.location
   resource_group_name   = var.resource_group_name
   network_interface_ids = [azurerm_network_interface.main.id]
-  vm_size               = var.vm_size
+  size                  = var.vm_size
 
-  storage_image_reference {
+  admin_username        = var.admin_username
+  disable_password_authentication = true
+
+  admin_ssh_key {
+    username = var.admin_username
+    public_key = var.ssh_public_key_content
+  }
+  source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-jammy"
     sku       = "22_04-lts"
     version   = "latest"
   }
-  storage_os_disk {
-    name              = "myosdisk1"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
-  }
-  os_profile {
-    computer_name  = "hostname"
-    admin_username = "testadmin"
-    admin_password = "Password1234!"
-  }
-  os_profile_linux_config {
-    disable_password_authentication = true
-    ssh_keys {
-      path     = "/home/users/Muska/.ssh/id_ed25519.pub"
-      key_data = var.ssh_public_key_content
-    }
+  os_disk {
+    name                 = "myosdisk1"
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
   }
 
   tags = {
@@ -60,7 +55,7 @@ resource "azurerm_virtual_machine_extension" "custom_script_extension" {
 
   settings = <<SETTINGS
  {
-  "fileUris": "https://github.com/Muskam09/devops_todolist_terraform_task/blob/main/install-app.sh"
+  "fileUris": ["${var.install_app_script_url}"],
   "commandToExecute": "bash install-app.sh
  }
 SETTINGS

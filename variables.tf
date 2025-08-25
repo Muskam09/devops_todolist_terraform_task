@@ -47,7 +47,7 @@ variable "public_ip_address_name" {
 }
 
 variable "dns_label_prefix" {
-  description = "The prefix for the DNS label of the Public IP Address (e.g., 'matetask')."
+  description = "The prefix for the DNS label of the Public IP Address"
   type        = string
   default     = "matetask"
 }
@@ -60,15 +60,17 @@ variable "vm_name" {
 }
 
 variable "vm_size" {
-  description = "The size of the Virtual Machine (e.g., 'Standard_B1s')."
+  description = "The size of the Virtual Machine"
   type        = string
   default     = "Standard_B1s"
 }
 
 variable "ssh_public_key_content" {
-  description = "The content of the SSH public key (e.g., from ~/.ssh/id_rsa.pub)."
+  description = "The content of the SSH public key"
   type        = string
   sensitive   = true
+  default     = "linuxboxsshkey"
+
 }
 
 variable "install_app_script_url" {
@@ -76,6 +78,13 @@ variable "install_app_script_url" {
   type        = string
   default     = "https://raw.githubusercontent.com/Muskam09/devops_todolist_terraform_task/refs/heads/main/install-app.sh"
 }
+
+variable "admin_username" {
+  description = "Admin username"
+  type        = string
+  default     = "testadmin"
+}
+
 
 #storage
 variable "storage_account_name" {
@@ -87,7 +96,7 @@ variable "storage_account_name" {
 variable "container_name" {
   description = "The name of the container for application artifacts."
   type        = string
-  default     = "tfstate"
+  default     = "task-artifacts"
 }
 
 variable "environment_tag" {
