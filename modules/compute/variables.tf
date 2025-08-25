@@ -26,7 +26,7 @@ variable "subnet_id" {
 variable "ssh_public_key_content" {
   description = "The content of the SSH public key"
   type        = string
-  sensitive = true
+  sensitive   = true
 }
 
 variable "install_app_script_url" {

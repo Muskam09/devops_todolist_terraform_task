@@ -22,11 +22,11 @@ resource "azurerm_linux_virtual_machine" "matebox" {
   network_interface_ids = [azurerm_network_interface.main.id]
   size                  = var.vm_size
 
-  admin_username        = var.admin_username
+  admin_username                  = var.admin_username
   disable_password_authentication = true
 
   admin_ssh_key {
-    username = var.admin_username
+    username   = var.admin_username
     public_key = var.ssh_public_key_content
   }
   source_image_reference {
