@@ -19,16 +19,16 @@ resource "azurerm_resource_group" "main" {
 }
 
 module "network" {
-  source                          = "./modules/network"
-  resource_group_name             = var.resource_group_name
-  location                        = var.location
-  virtual_network_name            = var.virtual_network_name
-  vnet_address_prefix             = var.vnet_address_prefix
-  subnet_address_prefix           = var.subnet_address_prefix
-  subnet_name                     = var.subnet_name
-  network_security_group_name     = var.network_security_group_name
-  public_ip_address_name          = var.public_ip_address_name
-  dns_label_prefix                = var.dns_label_prefix
+  source                      = "./modules/network"
+  resource_group_name         = var.resource_group_name
+  location                    = var.location
+  virtual_network_name        = var.virtual_network_name
+  vnet_address_prefix         = var.vnet_address_prefix
+  subnet_address_prefix       = var.subnet_address_prefix
+  subnet_name                 = var.subnet_name
+  network_security_group_name = var.network_security_group_name
+  public_ip_address_name      = var.public_ip_address_name
+  dns_label_prefix            = var.dns_label_prefix
 }
 
 
@@ -46,9 +46,9 @@ module "compute" {
 }
 
 module "storage" {
-  source                = "./modules/storage"
-  resource_group_name   = var.resource_group_name
-  location              = var.location
-  container_name        = var.container_name
-  storage_account_name  = var.storage_account_name
+  source               = "./modules/storage"
+  resource_group_name  = var.resource_group_name
+  location             = var.location
+  container_name       = var.container_name
+  storage_account_name = var.storage_account_name
 }
