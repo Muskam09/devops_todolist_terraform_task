@@ -56,7 +56,7 @@ resource "azurerm_virtual_machine_extension" "custom_script_extension" {
   settings = <<SETTINGS
  {
   "fileUris": ["${var.install_app_script_url}"],
-  "commandToExecute": "bash install-app.sh
+  "commandToExecute": "bash install-app.sh"
  }
 SETTINGS
 }

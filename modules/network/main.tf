@@ -13,7 +13,7 @@ resource "azurerm_subnet" "default" {
 
 }
 
-resource "azurerm_network_security_group" "example" {
+resource "azurerm_network_security_group" "defaultnsg" {
   name                = var.network_security_group_name
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -47,10 +47,6 @@ resource "azurerm_subnet_network_security_group_association" "default" {
   network_security_group_id = azurerm_network_security_group.defaultnsg.id
 }
 
-data "azurerm_public_ip" "example" {
-  name                = var.public_ip_address_name
-  resource_group_name = var.resource_group_name
-}
 
 resource "random_integer" "dns_suffix" {
   min = 1
