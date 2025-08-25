@@ -5,7 +5,7 @@ output "vm_id" {
 
 output "vm_private_ip" {
   description = "The private IP address of the Virtual Machine."
-  value       = azurerm_network_interface.main_nic.private_ip_address
+  value       = azurerm_network_interface.main.private_ip_address
 }
 
 output "nic_id" {
